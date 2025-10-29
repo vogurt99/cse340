@@ -9,7 +9,6 @@
 const express = require("express")
 const env = require("dotenv").config()
 const app = express()
-const path = require("path")
 const static = require("./routes/static")
 const expressLayouts = require("express-ejs-layouts")
 
@@ -24,7 +23,6 @@ app.set("layout", "./layouts/layout")
  * Routes
  *************************/
 app.use(static)
-
 // Index route
 app.get("/", function (req, res) {
   res.render("index", { title: "Home" })
@@ -35,12 +33,11 @@ app.get("/", function (req, res) {
  * Values from .env (environment) file
  *************************/
 const port = process.env.PORT || 5500
-let host = process.env.HOST || "localhost"
-host = host.replace(/^['"]+|['"]+$/g, "")
+const host = process.env.HOST || "0.0.0.0"
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-app.listen(port, host, () => {
+app.listen(port, host, function () {
   console.log(`App listening on ${host}:${port}`)
 })
