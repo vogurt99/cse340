@@ -1,7 +1,7 @@
-CREATE TYPE public."account-type" AS ENUM
+CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
-ALTER TYPE public."account-type"
+ALTER TYPE public.account_type
     OWNER TO cse340sjrg;
 
 -- Table structure for table 'classification'
@@ -236,3 +236,13 @@ VALUES   (
     'White',
     5
   );
+
+  -- Modify GM Hummer description
+UPDATE inventory
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM' AND inv_model = 'Hummer';
+
+-- Add "/vehicles" to image paths
+UPDATE inventory
+SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
