@@ -1,0 +1,18 @@
+<% if (title) { %>
+<h1>
+<%= title %>
+</h1>
+<% } else { %>
+<h1>Server Error</h1>
+<% } %>
+
+<%# Navigation bar %>
+<%- nav %>
+
+<section class="error-message">
+    <p>Oops! Something went wrong:</p>
+    <p><strong><%- message %></strong></p>
+    <p>Still reading? There's nothing more to find here. Please try again!</p>
+    <p>...</p>
+    <p>No, seriously. There's nothing going on here.</p>
+</section>

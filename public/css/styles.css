@@ -184,6 +184,7 @@ footer {
 
 /* Responsive Layout */
 @media (min-width: 768px) {
+
   #wrapper,
   main {
     max-width: 1080px;
@@ -224,4 +225,51 @@ footer {
   .hero-text {
     max-width: 48%;
   }
+}
+
+/* Inventory Classification Grid */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 1rem 0;
+  margin: 0;
+}
+
+#inv-display li {
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 1rem;
+}
+
+#inv-display img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+#inv-display h2 {
+  font-size: 1.1rem;
+  color: #b71c1c;
+  margin-bottom: 0.5rem;
+}
+
+#inv-display a {
+  color: #b71c1c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#inv-display a:hover {
+  color: #ff1744;
+}
+
+#inv-display .namePrice span {
+  display: block;
+  font-weight: bold;
+  color: #111;
+  margin-top: 0.5rem;
 }
