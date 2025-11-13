@@ -240,7 +240,7 @@ footer {
   margin-top: 0.5rem;
 }
 
-/* Vehicle Detail Two-Column Layout (Small Screen) */
+/* Vehicle Detail */
 .vehicle-detail {
   padding: 0 1rem;
   display: flex;
@@ -281,27 +281,21 @@ footer {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* FIX: Center all direct children horizontally */
 }
 
-/* FIX: Ensure detail text is centered on small screens by constraining width and using margin auto */
 .vehicle-right h2,
 .vehicle-right p {
   max-width: 500px;
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  /* FIX: Center the text inside the p/h2 element */
 }
 
-/* Overrides for .vehicle-description to keep content left-aligned inside its box */
 .vehicle-description {
   text-align: left;
-  /* Keep text inside the description box left-aligned */
   width: 100%;
   max-width: 500px;
   margin: 0 auto 1rem;
-  /* Center the description box itself and add space below */
 }
 
 .vehicle-actions {
@@ -309,10 +303,8 @@ footer {
   flex-direction: column;
   gap: 0.75rem;
   max-width: 300px;
-  /* Constrain the width of the buttons block */
   width: 100%;
   margin: 1rem auto;
-  /* FIX: Centers the entire .vehicle-actions block */
 }
 
 .vehicle-actions button {
