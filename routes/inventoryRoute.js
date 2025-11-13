@@ -17,9 +17,9 @@ router.get("/detail/:invId", invController.buildByInvId)
  * Friendly URLs for classifications
  **************************************** */
 router.get("/custom", (req, res) => res.redirect("/inv/type/1"))
+router.get("/sedan", (req, res) => res.redirect("/inv/type/5"))
 router.get("/sport", (req, res) => res.redirect("/inv/type/2"))
 router.get("/suv", (req, res) => res.redirect("/inv/type/3"))
 router.get("/truck", (req, res) => res.redirect("/inv/type/4"))
-router.get("/sedan", (req, res) => res.redirect("/inv/type/5"))
 
 module.exports = router
