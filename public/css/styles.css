@@ -7,6 +7,11 @@
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
@@ -98,6 +103,7 @@ nav a:hover {
   font-weight: bold;
   cursor: pointer;
   border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .hero button:hover {
@@ -107,7 +113,7 @@ nav a:hover {
 
 /* Main Section */
 main {
-  padding: 1rem;
+  padding: 1rem 0;
 }
 
 section {
@@ -117,6 +123,7 @@ section {
 section h2 {
   color: #b71c1c;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 /* Upgrades & Reviews Section */
@@ -125,6 +132,7 @@ section h2 {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   align-items: start;
+  margin: 0 auto;
 }
 
 .upgrades>h2 {
@@ -161,11 +169,13 @@ section h2 {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  align-items: center;
+  text-align: left;
 }
 
 .reviews ul {
-  list-style: disc;
-  padding-left: 1.5rem;
+  list-style: none;
+  padding-left: 0;
   margin: 0;
 }
 
@@ -182,51 +192,6 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Responsive Layout */
-@media (min-width: 768px) {
-
-  #wrapper,
-  main {
-    max-width: 1080px;
-    margin: 0 auto;
-  }
-
-  .grid-two {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    max-width: 1080px;
-    margin: 0 auto;
-  }
-
-  .upgrades {
-    order: 1;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .reviews {
-    order: 2;
-  }
-
-  .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: left;
-    padding: 2rem;
-    max-width: 1080px;
-    margin: 0 auto;
-  }
-
-  .hero img {
-    max-width: 50%;
-  }
-
-  .hero-text {
-    max-width: 48%;
-  }
-}
-
 /* Inventory Classification Grid */
 #inv-display {
   display: grid;
@@ -235,6 +200,7 @@ footer {
   list-style: none;
   padding: 1rem 0;
   margin: 0;
+  justify-content: center;
 }
 
 #inv-display li {
@@ -272,4 +238,212 @@ footer {
   font-weight: bold;
   color: #111;
   margin-top: 0.5rem;
+}
+
+/* Vehicle Detail Two-Column Layout (Small Screen) */
+.vehicle-detail {
+  padding: 0 1rem;
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.vehicle-left {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.vehicle-left img.vehicle-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  width: 100%;
+}
+
+.vehicle-description {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: left;
+}
+
+.vehicle-right {
+  width: 100%;
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  /* FIX: Center all direct children horizontally */
+}
+
+/* FIX: Ensure detail text is centered on small screens by constraining width and using margin auto */
+.vehicle-right h2,
+.vehicle-right p {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  /* FIX: Center the text inside the p/h2 element */
+}
+
+/* Overrides for .vehicle-description to keep content left-aligned inside its box */
+.vehicle-description {
+  text-align: left;
+  /* Keep text inside the description box left-aligned */
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 1rem;
+  /* Center the description box itself and add space below */
+}
+
+.vehicle-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 300px;
+  /* Constrain the width of the buttons block */
+  width: 100%;
+  margin: 1rem auto;
+  /* FIX: Centers the entire .vehicle-actions block */
+}
+
+.vehicle-actions button {
+  background-color: #fdd835;
+  color: #000;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin: 0;
+}
+
+.vehicle-actions button:hover {
+  background-color: #ff1744;
+  color: #fff;
+}
+
+/* Responsive Layout (Large Screen) */
+@media (min-width: 768px) {
+  section h2 {
+    text-align: left;
+  }
+
+  #wrapper,
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  .vehicle-detail {
+    padding: 0 1rem;
+  }
+
+  .grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .upgrades {
+    order: 1;
+    grid-template-columns: repeat(2, 1fr);
+    margin: unset;
+  }
+
+  .reviews {
+    order: 2;
+    align-items: flex-start;
+  }
+
+  .reviews ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 2rem;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .hero img {
+    max-width: 50%;
+  }
+
+  .hero-text {
+    max-width: 48%;
+  }
+
+  .vehicle-detail {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-content: flex-start;
+  }
+
+  .vehicle-left {
+    flex: unset;
+    min-width: unset;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .vehicle-left img.vehicle-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .vehicle-right {
+    width: unset;
+    flex: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  /* Revert alignment for large screens */
+  .vehicle-right h2,
+  .vehicle-right p {
+    max-width: unset;
+    margin: unset;
+    text-align: left;
+  }
+
+  .vehicle-description {
+    max-width: unset;
+    margin: unset;
+  }
+
+  .vehicle-actions {
+    max-width: unset;
+    margin: 1rem 0;
+  }
 }
