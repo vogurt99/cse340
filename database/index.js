@@ -19,7 +19,7 @@ if (process.env.NODE_ENV == "development") {
     // during development
     module.exports = {
         async query(text, params) {
-            try {
+            try {   
                 const res = await pool.query(text, params)
                 console.log("executed query", { text })
                 return res

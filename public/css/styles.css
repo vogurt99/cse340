@@ -326,6 +326,52 @@ footer {
   color: #fff;
 }
 
+/* Login Form */
+.login-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.login-form label {
+  font-weight: bold;
+  color: #b71c1c;
+}
+
+.login-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-form button {
+  background-color: #fdd835;
+  color: #000;
+  border: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #ff1744;
+  color: #fff;
+}
+
+.login-form + p {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 /* Responsive Layout (Large Screen) */
 @media (min-width: 768px) {
   section h2 {
