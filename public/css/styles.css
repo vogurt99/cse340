@@ -372,6 +372,12 @@ footer {
   margin-top: 1rem;
 }
 
+/* Footer Error Link */
+footer a.error-link {
+    color: white;
+    text-decoration: underline;
+}
+
 /* Responsive Layout (Large Screen) */
 @media (min-width: 768px) {
   section h2 {
