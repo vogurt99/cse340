@@ -4,15 +4,26 @@
 
 <%- messages() %>
 
-    <form action="/account/login" method="post" class="login-form">
+    <% if (errors && errors.array) { %>
+        <ul class="errors">
+            <% errors.array().forEach(function(error) { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }); %>
+        </ul>
+        <% } %>
 
-        <label for="account_email">Email</label>
-        <input type="email" id="account_email" name="account_email" required>
+            <form id="loginForm" action="/account/login" method="post" class="login-form">
 
-        <label for="account_password">Password</label>
-        <input type="password" id="account_password" name="account_password" required>
+                <label for="account_email">Email</label>
+                <input type="email" id="account_email" name="account_email" required
+                    value="<%= locals.account_email %>">
 
-        <button type="submit">Login</button>
-    </form>
+                <label for="account_password">Password</label>
+                <input type="password" id="account_password" name="account_password" required>
 
-    <p>No account? <a href="/account/register">Sign up</a></p>
+                <button type="submit">Login</button>
+            </form>
+
+            <p>No account? <a href="/account/register">Sign up</a></p>
