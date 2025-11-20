@@ -367,15 +367,89 @@ footer {
   color: #fff;
 }
 
-.login-form + p {
+.login-form+p {
   text-align: center;
   margin-top: 1rem;
 }
 
 /* Footer Error Link */
 footer a.error-link {
-    color: white;
-    text-decoration: underline;
+  color: white;
+  text-decoration: underline;
+}
+
+/* Add Inventory Page */
+.inventory-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.inventory-form label {
+  font-weight: bold;
+  color: #b71c1c;
+}
+
+.inventory-form input,
+.inventory-form textarea,
+.inventory-form select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.inventory-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.inventory-form button {
+  background-color: #fdd835;
+  color: #000;
+  border: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.3s ease;
+  width: 100%;
+}
+
+.inventory-form button:hover {
+  background-color: #ff1744;
+  color: #fff;
+}
+
+/* Error Messages */
+.errors {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: #ff1744;
+  font-weight: bold;
+}
+
+.errors li {
+  margin-bottom: 0.5rem;
+}
+
+/* Flash Messages */
+.notice {
+  background-color: #fdd835;
+  color: #000;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 /* Responsive Layout (Large Screen) */
@@ -489,5 +563,22 @@ footer a.error-link {
   .vehicle-actions {
     max-width: unset;
     margin: 1rem 0;
+  }
+
+  .inventory-form {
+    max-width: 600px;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+
+  .inventory-form input,
+  .inventory-form textarea,
+  .inventory-form select {
+    font-size: 1.1rem;
+  }
+
+  .inventory-form button {
+    padding: 1rem;
+    font-size: 1.1rem;
   }
 }
