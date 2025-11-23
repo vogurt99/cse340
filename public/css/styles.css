@@ -452,6 +452,63 @@ footer a.error-link {
   margin-bottom: 1rem;
 }
 
+/* Inventory Management Table */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+#inventoryDisplay th {
+  background-color: #b71c1c;
+  color: #fff;
+  font-weight: bold;
+}
+
+#inventoryDisplay tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#inventoryDisplay tr:hover {
+  background-color: #fdd835;
+}
+
+#inventoryDisplay a {
+  color: #b71c1c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#inventoryDisplay a:hover {
+  color: #ff1744;
+}
+
+#inventoryDisplay td a {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+#inventoryDisplay td a:hover {
+  background-color: #ff1744;
+  color: #fff;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+
 /* Responsive Layout (Large Screen) */
 @media (min-width: 768px) {
   section h2 {

@@ -1,0 +1,84 @@
+<h1>
+    <%= title %>
+</h1>
+
+<% if (message.notice) { %>
+    <% (Array.isArray(message.notice) ? message.notice : [message.notice]).forEach(msg=> { %>
+        <p class="notice">
+            <%= msg %>
+        </p>
+        <% }) %>
+            <% } %>
+
+                <% if (errors) { %>
+                    <ul class="errors">
+                        <% errors.array().forEach(function(error) { %>
+                            <li>
+                                <%= error.msg %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
+
+                        <form id="updateForm" action="/inv/update" method="post" class="inventory-form">
+                            <!-- hidden input for inv_id -->
+                            <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+                            <label for="classificationSelect">Classification</label>
+                            <%- classificationSelect %>
+
+                                <label for="inv_make">Make</label>
+                                <input type="text" name="inv_make" id="inv_make" required value="<%= inv_make %>">
+
+                                <label for="inv_model">Model</label>
+                                <input type="text" name="inv_model" id="inv_model" required value="<%= inv_model %>">
+
+                                <label for="inv_description">Description</label>
+                                <textarea name="inv_description" id="inv_description"
+                                    required><%= inv_description %></textarea>
+
+                                <label for="inv_image">Image Path</label>
+                                <input type="text" name="inv_image" id="inv_image" required value="<%= inv_image %>">
+
+                                <label for="inv_thumbnail">Thumbnail Path</label>
+                                <input type="text" name="inv_thumbnail" id="inv_thumbnail" required
+                                    value="<%= inv_thumbnail %>">
+
+                                <label for="inv_price">Price</label>
+                                <input type="number" name="inv_price" id="inv_price" required value="<%= inv_price %>">
+
+                                <label for="inv_year">Year</label>
+                                <input type="number" name="inv_year" id="inv_year" required value="<%= inv_year %>">
+
+                                <label for="inv_miles">Miles</label>
+                                <input type="number" name="inv_miles" id="inv_miles" required value="<%= inv_miles %>">
+
+                                <label for="inv_color">Color</label>
+                                <input type="text" name="inv_color" id="inv_color" required value="<%= inv_color %>">
+
+                                <button id="updateBtn" type="submit" disabled>Update Vehicle</button>
+                        </form>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                const form = document.getElementById("updateForm")
+                                const updateBtn = document.getElementById("updateBtn")
+
+                                const initialValues = {}
+                                form.querySelectorAll("input, select, textarea").forEach(input => {
+                                    initialValues[input.name] = input.value
+                                })
+
+                                form.addEventListener("input", () => {
+                                    let changed = false
+                                    form.querySelectorAll("input, select, textarea").forEach(input => {
+                                        if (input.value !== initialValues[input.name]) {
+                                            changed = true
+                                        }
+                                    })
+                                    updateBtn.disabled = !changed
+                                })
+                            })
+                        </script>
+
+                        <script src="/js/inv-update.js"></script>

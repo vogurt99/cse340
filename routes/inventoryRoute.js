@@ -1,6 +1,5 @@
-// Needed Resources
 const express = require("express")
-const router = new express.Router()
+const router = express.Router()
 const invController = require("../controllers/invController")
 const invValidate = require("../utilities/inventory-validation")
 const utilities = require("../utilities/")
@@ -8,12 +7,12 @@ const utilities = require("../utilities/")
 /* ****************************************
  * Route to build inventory by classification view
  **************************************** */
-router.get("/type/:classificationId", invController.buildByClassificationId)
+router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
 
 /* ****************************************
  * Route to build a single vehicle detail view
  **************************************** */
-router.get("/detail/:invId", invController.buildByInvId)
+router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId))
 
 /* ****************************************
  * Friendly URLs for classifications
@@ -27,17 +26,13 @@ router.get("/truck", (req, res) => res.redirect("/inv/type/4"))
 /* ****************************************
  * Inventory Management View
  **************************************** */
-router.get("/", invController.buildManagement)
+router.get("/", utilities.handleErrors(invController.buildManagement))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 /* ****************************************
  * Add Classification Routes
  **************************************** */
-// Display form
-router.get(
-    "/add-classification",
-    utilities.handleErrors(invController.buildAddClassification)
-)
-// Process form
+router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
 router.post(
     "/add-classification",
     invValidate.classificationRules(),
@@ -48,17 +43,27 @@ router.post(
 /* ****************************************
  * Add Inventory Routes
  **************************************** */
-// Display form
-router.get(
-    "/add-inventory",
-    utilities.handleErrors(invController.buildAddInventory)
-)
-// Process form
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
 router.post(
     "/add-inventory",
     invValidate.inventoryRules(),
     invValidate.checkInventoryData,
     utilities.handleErrors(invController.addInventory)
+)
+
+/* ****************************************
+ * Build edit inventory view
+ **************************************** */
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventory))
+
+/* ****************************************
+ * Process inventory update
+ **************************************** */
+router.post(
+    "/update",
+    invValidate.inventoryRules(),
+    invValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory)
 )
 
 module.exports = router

@@ -4,33 +4,32 @@
 
 <%- messages() %>
 
-    <% if (errors && errors.array) { %>
-        <ul class="errors">
-            <% errors.array().forEach(function(error) { %>
-                <li>
-                    <%= error.msg %>
-                </li>
-                <% }); %>
-        </ul>
-        <% } %>
+<% if (errors && errors.array) { %>
+    <ul class="errors">
+        <% errors.array().forEach(function(error) { %>
+            <li><%= error.msg %></li>
+        <% }); %>
+    </ul>
+<% } %>
 
-            <form id="registrationForm" action="/account/register" method="post">
+<form id="registrationForm" action="/account/register" method="post" class="login-form">
 
-                <label for="accountFirstname">First Name</label>
-                <input type="text" name="account_firstname" id="accountFirstname" required
-                    value="<%= locals.account_firstname %>">
+    <label for="accountFirstname">First Name</label>
+    <input type="text" name="account_firstname" id="accountFirstname" required
+        value="<%= locals.account_firstname %>">
 
-                <label for="accountLastname">Last Name</label>
-                <input type="text" name="account_lastname" id="accountLastname" required
-                    value="<%= locals.account_lastname %>">
+    <label for="accountLastname">Last Name</label>
+    <input type="text" name="account_lastname" id="accountLastname" required
+        value="<%= locals.account_lastname %>">
 
-                <label for="accountEmail">Email</label>
-                <input type="email" name="account_email" id="accountEmail" required value="<%= locals.account_email %>">
+    <label for="accountEmail">Email</label>
+    <input type="email" name="account_email" id="accountEmail" required
+        value="<%= locals.account_email %>">
 
-                <label for="accountPassword">Password</label>
-                <input type="password" name="account_password" id="accountPassword" required>
+    <label for="accountPassword">Password</label>
+    <input type="password" name="account_password" id="accountPassword" required>
 
-                <button type="submit">Register</button>
-            </form>
+    <button type="submit">Register</button>
+</form>
 
-            <p>Already have an account? <a href="/account/login">Login</a></p>
+<p>Already have an account? <a href="/account/login">Login</a></p>

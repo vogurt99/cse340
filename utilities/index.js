@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -66,5 +68,58 @@ Util.buildDetailView = function (vehicle) {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+    if (req.cookies.jwt) {
+        jwt.verify(
+            req.cookies.jwt,
+            process.env.ACCESS_TOKEN_SECRET,
+            function (err, accountData) {
+                if (err) {
+                    req.flash("Please log in")
+                    res.clearCookie("jwt")
+                    return res.redirect("/account/login")
+                }
+                res.locals.accountData = accountData
+                res.locals.loggedin = 1
+                next()
+            })
+    } else {
+        next()
+    }
+}
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+    if (res.locals.loggedin) {
+        next()
+    } else {
+        req.flash("notice", "Please log in.")
+        return res.redirect("/account/login")
+    }
+}
+
+/* ****************************************
+* Build the classification view
+**************************************** */
+Util.buildClassificationList = async function (selectedId = null, isEdit = false) {
+    const data = await invModel.getClassifications()
+    const classifications = Array.isArray(data) ? data : data.rows || []
+
+    let list = `<select name='classification_id' ${isEdit ? "" : 'id="classificationList"'} required>`
+    list += "<option value=''>Choose a Classification</option>"
+    classifications.forEach((row) => {
+        list += `<option value='${row.classification_id}'`
+        if (selectedId && row.classification_id == selectedId) list += " selected"
+        list += `>${row.classification_name}</option>`
+    })
+    list += "</select>"
+    return list
+}
 
 module.exports = Util
