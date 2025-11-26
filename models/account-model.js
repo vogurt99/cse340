@@ -1,4 +1,5 @@
 const pool = require("../database")
+const bcrypt = require("bcryptjs")
 
 /* *****************************
  *   Register new account
@@ -6,7 +7,8 @@ const pool = require("../database")
 async function registerAccount(account_firstname, account_lastname, account_email, account_password) {
     try {
         const sql = "INSERT INTO account (account_firstname, account_lastname, account_email, account_password, account_type) VALUES ($1, $2, $3, $4, 'Client') RETURNING *"
-        return await pool.query(sql, [account_firstname, account_lastname, account_email, account_password])
+        const result = await pool.query(sql, [account_firstname, account_lastname, account_email, account_password])
+        return result.rows[0]
     } catch (error) {
         return error.message
     }
@@ -52,4 +54,46 @@ async function getAccountById(account_id) {
     }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById }
+/* *****************************
+* Update account information
+* ***************************** */
+async function updateAccount(account_id, account_firstname, account_lastname, account_email) {
+    try {
+        const sql = `UPDATE account
+                     SET account_firstname = $1,
+                         account_lastname = $2,
+                         account_email = $3
+                     WHERE account_id = $4
+                     RETURNING *`
+        const result = await pool.query(sql, [account_firstname, account_lastname, account_email, account_id])
+        return result.rowCount > 0
+    } catch (error) {
+        return false
+    }
+}
+
+/* *****************************
+* Update account password
+* ***************************** */
+async function updatePassword(account_id, account_password) {
+    try {
+        const hashedPassword = await bcrypt.hash(account_password, 10)
+        const sql = `UPDATE account
+                     SET account_password = $1
+                     WHERE account_id = $2
+                     RETURNING *`
+        const result = await pool.query(sql, [hashedPassword, account_id])
+        return result.rowCount > 0
+    } catch (error) {
+        return false
+    }
+}
+
+module.exports = {
+    registerAccount,
+    checkExistingEmail,
+    getAccountByEmail,
+    getAccountById,
+    updateAccount,
+    updatePassword
+}
