@@ -1,0 +1,49 @@
+<h1>
+    <%= title %>
+</h1>
+
+<%- messages() %>
+
+    <% if (errors && errors.array) { %>
+        <ul class="errors">
+            <% errors.array().forEach(function(error) { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
+
+            <section class="account-update-section">
+                <h2>Account Update</h2>
+                <form action="/account/update" method="post">
+                    <input type="hidden" name="account_id" value="<%= account.account_id %>" />
+
+                    <label for="account_firstname">First Name:</label>
+                    <input type="text" id="account_firstname" name="account_firstname" required
+                        value="<%= account.account_firstname ? account.account_firstname : '' %>" />
+
+                    <label for="account_lastname">Last Name:</label>
+                    <input type="text" id="account_lastname" name="account_lastname" required
+                        value="<%= account.account_lastname ? account.account_lastname : '' %>" />
+
+                    <label for="account_email">Email:</label>
+                    <input type="email" id="account_email" name="account_email" required
+                        value="<%= account.account_email ? account.account_email : '' %>" />
+
+                    <input type="submit" value="Update Account" />
+                </form>
+            </section>
+
+            <section class="password-change-section">
+                <h2>Change Password</h2>
+                <form action="/account/updatePassword" method="post">
+                    <input type="hidden" name="account_id" value="<%= account.account_id %>" />
+
+                    <label for="account_password">New Password:</label>
+                    <input type="password" id="account_password" name="account_password" required
+                        placeholder="Enter a new password (8+ chars, letters & numbers)" />
+
+                    <input type="submit" value="Change Password" />
+                </form>
+            </section>

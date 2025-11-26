@@ -79,8 +79,8 @@ Util.checkJWTToken = (req, res, next) => {
             process.env.ACCESS_TOKEN_SECRET,
             function (err, accountData) {
                 if (err) {
-                    req.flash("Please log in")
                     res.clearCookie("jwt")
+                    res.locals.loggedin = 0
                     return res.redirect("/account/login")
                 }
                 res.locals.accountData = accountData
@@ -88,6 +88,7 @@ Util.checkJWTToken = (req, res, next) => {
                 next()
             })
     } else {
+        res.locals.loggedin = 0
         next()
     }
 }
@@ -120,6 +121,21 @@ Util.buildClassificationList = async function (selectedId = null, isEdit = false
     })
     list += "</select>"
     return list
+}
+
+Util.checkAdminAccess = (req, res, next) => {
+    if (!res.locals.loggedin) {
+        req.flash("notice", "Please log in.")
+        return res.redirect("/account/login")
+    }
+
+    const accountType = res.locals.accountData.account_type
+    if (accountType === "Employee" || accountType === "Admin") {
+        return next()
+    }
+
+    req.flash("notice", "Access denied.")
+    return res.redirect("/account/login")
 }
 
 module.exports = Util

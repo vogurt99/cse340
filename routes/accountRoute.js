@@ -27,4 +27,28 @@ router.get(
     utilities.handleErrors(accountController.buildAccountManagement)
 )
 
+router.get("/logout", (req, res) => {
+    res.clearCookie("jwt")
+    res.locals.loggedin = 0
+    res.redirect("/")
+})
+
+router.get(
+    "/update/:account_id",
+    utilities.checkJWTToken,
+    utilities.handleErrors(accountController.buildAccountUpdate)
+);
+
+router.post(
+    "/update",
+    utilities.checkJWTToken,
+    utilities.handleErrors(accountController.updateAccount)
+);
+
+router.post(
+    "/updatePassword",
+    utilities.checkJWTToken,
+    utilities.handleErrors(accountController.updatePassword)
+);
+
 module.exports = router

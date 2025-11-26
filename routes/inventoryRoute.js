@@ -7,12 +7,18 @@ const utilities = require("../utilities/")
 /* ****************************************
  * Route to build inventory by classification view
  **************************************** */
-router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
+router.get(
+    "/type/:classificationId",
+    utilities.handleErrors(invController.buildByClassificationId)
+)
 
 /* ****************************************
  * Route to build a single vehicle detail view
  **************************************** */
-router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId))
+router.get(
+    "/detail/:invId",
+    utilities.handleErrors(invController.buildByInvId)
+)
 
 /* ****************************************
  * Friendly URLs for classifications
@@ -26,15 +32,34 @@ router.get("/truck", (req, res) => res.redirect("/inv/type/4"))
 /* ****************************************
  * Inventory Management View
  **************************************** */
-router.get("/", utilities.handleErrors(invController.buildManagement))
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get(
+    "/",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
+    utilities.handleErrors(invController.buildManagement)
+)
+
+router.get(
+    "/getInventory/:classification_id",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
+    utilities.handleErrors(invController.getInventoryJSON)
+)
 
 /* ****************************************
  * Add Classification Routes
  **************************************** */
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
+router.get(
+    "/add-classification",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
+    utilities.handleErrors(invController.buildAddClassification)
+)
+
 router.post(
     "/add-classification",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
     invValidate.classificationRules(),
     invValidate.checkClassificationData,
     utilities.handleErrors(invController.addClassification)
@@ -43,9 +68,17 @@ router.post(
 /* ****************************************
  * Add Inventory Routes
  **************************************** */
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
+router.get(
+    "/add-inventory",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
+    utilities.handleErrors(invController.buildAddInventory)
+)
+
 router.post(
     "/add-inventory",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
     invValidate.inventoryRules(),
     invValidate.checkInventoryData,
     utilities.handleErrors(invController.addInventory)
@@ -54,13 +87,20 @@ router.post(
 /* ****************************************
  * Build edit inventory view
  **************************************** */
-router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventory))
+router.get(
+    "/edit/:inv_id",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
+    utilities.handleErrors(invController.buildEditInventory)
+)
 
 /* ****************************************
  * Process inventory update
  **************************************** */
 router.post(
     "/update",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
     invValidate.inventoryRules(),
     invValidate.checkUpdateData,
     utilities.handleErrors(invController.updateInventory)
@@ -69,13 +109,20 @@ router.post(
 /* ****************************************
  * Build delete confirmation view
  **************************************** */
-router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteConfirm))
+router.get(
+    "/delete/:inv_id",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
+    utilities.handleErrors(invController.buildDeleteConfirm)
+)
 
 /* ****************************************
  * Process inventory delete
  **************************************** */
 router.post(
     "/delete",
+    utilities.checkJWTToken,
+    utilities.checkAdminAccess,
     utilities.handleErrors(invController.deleteInventory)
 )
 

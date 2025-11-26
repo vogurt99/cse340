@@ -509,6 +509,88 @@ button:disabled {
   background-color: #ccc;
 }
 
+/* Update Account Information */
+#account-update-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #fdd835;
+  color: #000;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+#account-update-link:hover {
+  background-color: #b71c1c;
+  color: #fff;
+}
+
+/* Manage Inventory */
+#manage-inventory-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #fdd835;
+  color: #000;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+#manage-inventory-link:hover {
+  background-color: #b71c1c;
+  color: #fff;
+}
+
+/* Update Account */
+.account-update-section,
+.password-change-section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.account-update-section h2,
+.password-change-section h2 {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #fdd835;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #b71c1c;
+  color: #fff;
+}
+
 /* Responsive Layout (Large Screen) */
 @media (min-width: 768px) {
   section h2 {
