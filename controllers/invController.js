@@ -243,16 +243,12 @@ invController.addInventory = async function (req, res, next) {
             classification_id
         )
 
-        const nav = await utilities.getNav()
-        const classificationList = await buildClassificationList(classification_id)
         if (regResult) {
             req.flash("notice", `Inventory item ${inv_make} ${inv_model} added successfully.`)
-            res.render("inventory/management", {
-                title: "Inventory Management",
-                nav,
-                message: req.flash()
-            })
+            res.redirect("/inv") // <-- redirect straight to inventory management
         } else {
+            const nav = await utilities.getNav()
+            const classificationList = await buildClassificationList(classification_id)
             req.flash("notice", "Sorry, adding inventory item failed.")
             res.render("inventory/add-inventory", {
                 title: "Add Inventory Item",
@@ -450,6 +446,55 @@ function buildDetailView(inv) {
             <p>Color: ${inv.inv_color}</p>
         </div>
     </div>`
+}
+
+/* ****************************************
+ * Build delete confirmation view
+ **************************************** */
+invController.buildDeleteConfirm = async function (req, res, next) {
+    const inv_id = parseInt(req.params.inv_id)
+    try {
+        const nav = await utilities.getNav()
+        const itemData = await invModel.getInventoryByInvId(inv_id)
+        if (!itemData) {
+            req.flash("notice", "Inventory item not found")
+            return res.redirect("/inv")
+        }
+
+        res.render("inventory/delete-confirmation", {
+            title: `Delete ${itemData.inv_make} ${itemData.inv_model}`,
+            nav,
+            inv_id: itemData.inv_id,
+            inv_make: itemData.inv_make,
+            inv_model: itemData.inv_model,
+            inv_year: itemData.inv_year,
+            inv_price: itemData.inv_price,
+            message: req.flash(),
+            errors: null
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+/* ****************************************
+ * Process inventory delete
+ **************************************** */
+invController.deleteInventory = async function (req, res, next) {
+    const inv_id = parseInt(req.body.inv_id)
+    try {
+        const result = await invModel.deleteInventoryItem(inv_id)
+        const nav = await utilities.getNav()
+        if (result) {
+            req.flash("notice", "Inventory item deleted successfully.")
+            res.redirect("/inv")
+        } else {
+            req.flash("notice", "Delete failed.")
+            res.redirect(`/inv/delete/${inv_id}`)
+        }
+    } catch (error) {
+        next(error)
+    }
 }
 
 module.exports = invController

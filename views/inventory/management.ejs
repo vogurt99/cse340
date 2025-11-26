@@ -4,14 +4,10 @@
   <h1>Inventory Management</h1>
 <% } %>
 
-<%- messages() %>
-
-<% if (message && message.length) { %>
-  <ul class="messages">
-    <% message.forEach(function(m) { %>
-      <li><%= m %></li>
-    <% }) %>
-  </ul>
+<% if (message && message.notice) { %>
+  <% (Array.isArray(message.notice) ? message.notice : [message.notice]).forEach(msg => { %>
+    <p class="notice"><%= msg %></p>
+  <% }) %>
 <% } %>
 
 <nav class="management-links">

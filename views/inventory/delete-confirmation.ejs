@@ -1,0 +1,41 @@
+<h1>
+    <%= title %>
+</h1>
+
+<p>Confirm Deletion - The delete is permanent.</p>
+
+<% if (message.notice) { %>
+    <% (Array.isArray(message.notice) ? message.notice : [message.notice]).forEach(msg=> { %>
+        <p class="notice">
+            <%= msg %>
+        </p>
+        <% }) %>
+            <% } %>
+
+                <% if (errors) { %>
+                    <ul class="errors">
+                        <% errors.array().forEach(function(error) { %>
+                            <li>
+                                <%= error.msg %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
+
+                        <form action="/inv/delete" method="post" class="inventory-form">
+                            <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+                            <label for="inv_make">Make</label>
+                            <input type="text" name="inv_make" id="inv_make" readonly value="<%= inv_make %>">
+
+                            <label for="inv_model">Model</label>
+                            <input type="text" name="inv_model" id="inv_model" readonly value="<%= inv_model %>">
+
+                            <label for="inv_year">Year</label>
+                            <input type="number" name="inv_year" id="inv_year" readonly value="<%= inv_year %>">
+
+                            <label for="inv_price">Price</label>
+                            <input type="number" name="inv_price" id="inv_price" readonly value="<%= inv_price %>">
+
+                            <button type="submit">Delete Vehicle</button>
+                        </form>
