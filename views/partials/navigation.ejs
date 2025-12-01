@@ -6,5 +6,9 @@
     <li><a href="/inv/sport">Sport</a></li>
     <li><a href="/inv/suv">SUV</a></li>
     <li><a href="/inv/truck">Truck</a></li>
+
+    <% if (locals.loggedin) { %>
+      <li><a href="/account/favorite">Favorites</a></li>
+      <% } %>
   </ul>
 </nav>

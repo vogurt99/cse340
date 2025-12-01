@@ -47,6 +47,14 @@ account_type account_type NOT NULL DEFAULT 'Client'::account_type,
 CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
 
+-- Table structure for table `favorite`
+CREATE TABLE favorite (
+  favorite_id SERIAL PRIMARY KEY,
+  account_id INT NOT NULL REFERENCES account(account_id),
+  inv_id INT NOT NULL REFERENCES inventory(inv_id),
+  UNIQUE(account_id, inv_id)
+);
+
 -- Data for table 'classification'
 INSERT INTO PUBLIC.classification (classification_name)
 VALUES ('Custom'),

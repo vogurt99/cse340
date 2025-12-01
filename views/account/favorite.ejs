@@ -1,0 +1,51 @@
+<!-- <h1>
+    <%= title %>
+</h1>
+
+<% if (favorite.length> 0) { %>
+    <ul id="favorite-list">
+        <% favorite.forEach(fav=> { %>
+            <li>
+                <img src="<%= fav.inv_image %>" alt="<%= fav.inv_make %> <%= fav.inv_model %>">
+                <h3>
+                    <%= fav.inv_make %>
+                        <%= fav.inv_model %>
+                </h3>
+                <p>Year: <%= fav.inv_year %>
+                </p>
+                <p>Price: $<%= fav.inv_price %>
+                </p>
+                <form action="/account/favorite/remove" method="post">
+                    <input type="hidden" name="inv_id" value="<%= fav.inv_id %>">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+            <% }) %>
+    </ul>
+    <% } else { %>
+        <p>You have no favorites yet.</p>
+        <% } %> -->
+
+<h1>My Favorites</h1>
+
+<% if (favorite.length===0) { %>
+    <p class="notice">You have not added any favorites yet.</p>
+    <% } else { %>
+        <ul id="inv-display">
+            <% favorite.forEach(fav=> { %>
+                <li>
+                    <img src="<%= fav.inv_image %>" alt="<%= fav.inv_make %> <%= fav.inv_model %>">
+                    <h2>
+                        <%= fav.inv_make %>
+                            <%= fav.inv_model %>
+                    </h2>
+                    <span>$<%= fav.inv_price %></span>
+
+                    <form action="/account/favorite/remove" method="post">
+                        <input type="hidden" name="inv_id" value="<%= fav.inv_id %>">
+                        <button type="submit">Remove</button>
+                    </form>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>

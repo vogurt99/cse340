@@ -1,15 +1,26 @@
 <% if (title) { %>
-<h1><%= title %></h1>
-<% } else { %>
-<h1>Vehicle Details</h1>
-<% } %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { %>
+        <h1>Vehicle Details</h1>
+        <% } %>
 
-<%- grid %>
+            <%- grid %>
 
-<!-- Action Buttons -->
-<section class="vehicle-actions">
-    <button onclick="alert('Start My Purchase placeholder')">Start My Purchase</button>
-    <button onclick="alert('Contact Us placeholder')">Contact Us</button>
-    <button onclick="alert('Schedule Test Drive placeholder')">Schedule Test Drive</button>
-    <button onclick="alert('Apply for Financing placeholder')">Apply for Financing</button>
-</section>
+                <!-- Action Buttons -->
+                <section class="vehicle-actions">
+                    <button onclick="alert('Start My Purchase placeholder')">Start My Purchase</button>
+                    <button onclick="alert('Contact Us placeholder')">Contact Us</button>
+                    <button onclick="alert('Schedule Test Drive placeholder')">Schedule Test Drive</button>
+                    <button onclick="alert('Apply for Financing placeholder')">Apply for Financing</button>
+
+                    <% if (locals.loggedin) { %>
+                        <form action="/account/favorite/add" method="post">
+                            <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+                            <button type="submit">Add to Favorites</button>
+                        </form>
+                        <% } %>
+
+
+                </section>

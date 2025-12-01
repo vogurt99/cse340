@@ -4,6 +4,7 @@ require("dotenv").config()
 const utilities = require("../utilities")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
+const favoriteModel = require("../models/favorite-model")
 
 /* ****************************************
  *  Deliver login view
@@ -204,6 +205,46 @@ async function updatePassword(req, res) {
     }
 }
 
+/* ****************************************
+ *  Display Favorite
+ * *************************************** */
+async function buildFavorite(req, res, next) {
+    try {
+        const accountData = res.locals.accountData
+        const nav = await utilities.getNav()
+        const favorite = await favoriteModel.getFavoriteByAccountId(accountData.account_id)
+        res.render("account/favorite", {
+            title: "My Favorites",
+            nav,
+            favorite,
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+/* ****************************************
+ *  Add Favorite
+ * *************************************** */
+async function addFavorite(req, res) {
+    const account_id = res.locals.accountData.account_id
+    const { inv_id } = req.body
+
+    await favoriteModel.addFavorite(account_id, inv_id)
+    res.redirect("/account/favorite")
+}
+
+/* ****************************************
+ *  Remove Favorite
+ * *************************************** */
+async function removeFavorite(req, res) {
+    const account_id = res.locals.accountData.account_id
+    const { inv_id } = req.body
+
+    await favoriteModel.removeFavorite(account_id, inv_id)
+    res.redirect("/account/favorite")
+}
+
 module.exports = {
     buildLogin,
     buildRegister,
@@ -212,5 +253,8 @@ module.exports = {
     buildAccountManagement,
     buildAccountUpdate,
     updateAccount,
-    updatePassword
+    updatePassword,
+    buildFavorite,
+    addFavorite,
+    removeFavorite
 }

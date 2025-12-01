@@ -53,7 +53,8 @@ invController.buildByInvId = async function (req, res, next) {
         res.render("inventory/detail", {
             title: name,
             nav,
-            grid
+            grid,
+            vehicle: data
         })
     } catch (error) {
         next(error)

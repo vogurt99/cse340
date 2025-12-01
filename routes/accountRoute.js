@@ -3,6 +3,7 @@ const router = new express.Router()
 const utilities = require("../utilities")
 const accountController = require("../controllers/accountController")
 const regValidate = require("../utilities/account-validation")
+const favoriteController = require("../controllers/favoriteController")
 
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
@@ -49,6 +50,27 @@ router.post(
     "/updatePassword",
     utilities.checkJWTToken,
     utilities.handleErrors(accountController.updatePassword)
+);
+
+router.get(
+    "/favorite",
+    utilities.checkJWTToken,
+    utilities.checkLogin,
+    utilities.handleErrors(favoriteController.buildFavorite)
+);
+
+router.post(
+    "/favorite/add",
+    utilities.checkJWTToken,
+    utilities.checkLogin,
+    utilities.handleErrors(favoriteController.addFavorite)
+);
+
+router.post(
+    "/favorite/remove",
+    utilities.checkJWTToken,
+    utilities.checkLogin,
+    utilities.handleErrors(accountController.removeFavorite)
 );
 
 module.exports = router
